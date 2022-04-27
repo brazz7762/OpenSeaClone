@@ -24,10 +24,12 @@ module.exports = {
       chainId: 1337;
     },
     mumbai: {
-      url: `https://polygon-mumbai.infura.io/v3/${projectId}`
+      url: `https://polygon-mumbai.infura.io/v3/${projectId}`,
+      privateKey: [privateKey]
     },
     mainnet: {
-      url: `https://polygon-mainnet.infura.io/v3/${projectId}`
+      url: `https://polygon-mainnet.infura.io/v3/${projectId}`,
+      privateKey: [privateKey]
     }
   }
   solidity: "0.8.4",
