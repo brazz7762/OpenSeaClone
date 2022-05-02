@@ -95,8 +95,51 @@ contract NFTMarketplace is ReentrancyGuard {
         idMarketItem[itemId].owner = payable(msg.sender); //setting buyer as new owner
         idMarketItem[itemId].sold = true;
         _itemSold.increment();//incrementing total sold
+        payable(owner).transfer(listingPrice);
     }
 
+    //@notice total number of items unsold on Marketplace
+    function getUnsoldItems() public view return(MarketItem[] memory){
+        uint itemCount = _itemIds.current(); //total number of items created on marketplace
+        uint unsoldItemCount = _itemIds.current() - _itemSold.current();
+        uint currentIndex = 0;
+
+        MarketItem[] memory items = new MarketItem[](unsoldItemCount);
+        for(uint i = 0; i < itemCount; i++){
+          if(idMarketItem[i + 1].owner == address(0)) {
+            uint currentId = idMarketItem[i + 1].itemId;
+            MarketItem storage currentItem = idMarketItem[currentId];
+            items[currentIndex] = currentItem;
+          }
+        }
+
+        return items; //returns array of unsold items
+    }
+
+    //returns list of NFTs owned by the user
+    function fetchMyNFTS() public view returns (MarketItem[] memory){
+      uint totalItemCount = _itemIds.Current();
+      uint itemCount = 0;
+      uint currentIndex = 0;
+
+      for(uint i = 0; i < totalItemCount; i ++){
+        //getting items user owns
+        if(idMarketItem[i + 1].owner == msg.sender){
+          itemCount += 1;
+        }
+      }
+
+      MarketItem[] memory items = new MarketItem[](itemCount);
+      for(uint i = 0; i < totalItemCount; i++){
+        if(idMarketItem[i +1].owner == msg.sender){
+          uint currentId = idMarketItem[i+1].itemId;
+          MarketItem storage currentItem = idMarketItem[currentId];
+          items[currentIndex] = currentItem;
+          currentIndex += 1;
+        }
+      }
+      return items;
+    }
 }
 
 
