@@ -3,7 +3,7 @@ const { ethers } + require("hardhat");
 
 scribe("NFT_Marketplace", function (){
   it("Should create and execute market sales", async function(){
-    const Market = await ethers.getContractFactory("NFT_MarketPlace");
+    const Market = await ethers.getContractFactory("NFT_Marketplace");
     const market = await Market.deploy();
     await market.deployed(); // deploy Marketplace
     const marketAddress = market.address;
