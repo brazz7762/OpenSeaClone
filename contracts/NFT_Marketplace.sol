@@ -140,6 +140,31 @@ contract NFTMarketplace is ReentrancyGuard {
       }
       return items;
     }
+
+    function fetchSellerNFTS() public view returns (MarketItem[] memory){
+      uint totalItemCount = _itemIds.Current();
+      uint itemCount = 0;
+      uint currentIndex = 0;
+
+      for(uint i = 0; i < totalItemCount; i ++){
+        //getting items user owns
+        if(idMarketItem[i + 1].seller == msg.sender){
+          itemCount += 1;
+        }
+      }
+
+      MarketItem[] memory items = new MarketItem[](itemCount);
+      for(uint i = 0; i < totalItemCount; i++){
+        if(idMarketItem[i +1].seller == msg.sender){
+          uint currentId = idMarketItem[i+1].itemId;
+          MarketItem storage currentItem = idMarketItem[currentId];
+          items[currentIndex] = currentItem;
+          currentIndex += 1;
+        }
+      }
+      return items;
+    }
+
 }
 
 
