@@ -10,7 +10,7 @@ describe("NFTMarketplace", function (){
 
 
     const NFT = await ethers.getContractFactory("NFT");
-    const nft = await NFT.deploy();
+    const nft = await NFT.deploy(marketAddress);
     await nft.deployed(); // deploy NFT
     const nftContractAddress = nft.address;
 
@@ -28,7 +28,7 @@ describe("NFTMarketplace", function (){
 
     await market.connect(buyerAddress).createMarketSale(nftContractAddress, 1, {value: auctionPrice});
 
-    const items = await market.fetchMarketItems();
+    const items = await market.fetchMyNFTS();
 
     console.log("items", items);
 
