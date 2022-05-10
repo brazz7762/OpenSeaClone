@@ -12,7 +12,7 @@ import NFT from '../artifacts/contracts/NFT.sol/NFT.json';
 import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json';
 
 export default function Home() {
-  const [nfts,setNFTS] = useState([]);
+  const [nfts, setNFTS] = useState([]);
   const [loadingState, setLoadingState] = useState('not-loaded');
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function Home() {
       return item;
     }));
 
-      setNFTs(items);
+      setNFTS(items);
 
       setLoadingState('loaded');
 
