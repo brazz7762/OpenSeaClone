@@ -32,5 +32,5 @@ module.exports = {
       privateKey: [privateKey]
     },
   },
-  solidity: "0.8.1"
+  solidity: "0.7.3"
 };
