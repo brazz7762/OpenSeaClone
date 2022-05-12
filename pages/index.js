@@ -26,8 +26,10 @@ export default function Home() {
     const mpContract = new ethers.Contract(nftMarketAddress, NFTMarketplace.abi, provider);
     //gets array of not sold market items
     const data = await mpContract.getUnsoldItems();
+    console.log("data on 29: ", data);
     const items = await Promise.all(data.map(async i => {
-      const tokenUri = await tokenContract.tokenUri(i.tokenId);
+      const tokenUri = await tokenContract.tokenURI(i.tokenId);
+      console.log("tokenURI ", tokenUri)
       const meta = await axios.get(tokenUri);
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
       let item = {
@@ -50,7 +52,7 @@ export default function Home() {
 
   async function buyNFT(nft){
     const web3Modal = new Web3Modal()
-    const connection = await web3modal.connect();
+    const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
 
     //sign transaction
@@ -79,7 +81,7 @@ export default function Home() {
           {
             nfts.map((nft, i) => (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <Image src={nft.image} alt='NFT Image'/>
+                <Image src={nft.image} alt='NFT Image' width={225} height={200} />
                 <div className="p-4">
                   <p style={{height: '64px'}} className='text-2xl font-semibold'>
                     {nft.name}

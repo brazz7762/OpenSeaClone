@@ -43,6 +43,7 @@
     "promises": "^0.2.5",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router": "^6.3.0",
     "solidity": "0.0.1",
     "tailwind": "^4.0.0",
     "web3modal": "^1.9.7"

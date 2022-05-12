@@ -32,6 +32,5 @@ contract NFT is ERC721URIStorage {
     setApprovalForAll(contractAddress, true); //allow for approvals to marketplace
 
     return newItemId;
-
   }
 }
